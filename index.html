@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="header">
+    <p>Fluent Forms Template Library</p>
+    <h2>Patient Intake Form Template</h2>
+    <p>Take this form to investigate your patient before admission</p>
+  </div>
+  <div class="form">
+    <div class="form-header">
+      <h2>Patient Intake Form</h2>
+      <button type="button">Download</button>
+    </div>
+    <div class="form-body">
+      <div class="name mb35">
+        <div class="first-name">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname">
+        </div>
+        <div class="last-name">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname">
+        </div>
+      </div>
+      <div class="age textbox asterisk mb35">
+        <label for="age">Patient Age<span>*</span></label>
+        <input type="number" id="age" min="1" max="150">
+        <p class="err ageErr hide">Age can't be empty</p>
+      </div>
+      <div class="nickname textbox mb35">
+        <label for="nickname">Prefered Name / Nickname</label>
+        <input type="text" id="nickname">
+      </div>
+      <div class="gender textbox asterisk mb35">
+        <label for="gender">Patient Gender<span>*</span></label>
+        <select name="dropdown" id="gender">
+          <option value="" disabled selected>- Select -</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </select>
+        <p class="err genderErr hide">Gender can't be empty</p>
+      </div>
+      <div class="phone textbox asterisk mb35">
+        <label for="phone">Phone no.<span>*</span></label>
+        <input type="number" id="phone">
+        <p class="err phoneErr hide">Phone can't be empty</p>
+      </div>
+      <div class="spouce-name textbox mb35">
+        <label for="pouce-name">Spouce Name</label>
+        <input type="text" id="spouce-name">
+      </div>
+      <div class="live-with textbox mb35">
+        <label for="with">With whome do you live?</label>
+        <input type="text" id="lwith">
+      </div>
+      <div class="marriage asterisk mb35">
+        <label>Marital Status<span>*</span></label>
+        <div class="mariage-option">
+          <div class="radio">
+            <input type="radio" id="married" name="marriage" value="Married">
+            <label for="married">Married</label><br>
+          </div>
+          <div class="radio">
+            <input type="radio" id="unmarried" name="marriage" value="Unmarried">
+            <label for="unmarried">Unmarried</label><br>
+          </div>
+          <div class="radio">
+            <input type="radio" id="others" name="marriage" value="Others">
+            <label for="others">Others</label><br>
+          </div>
+        </div>
+        <p class="err marriageErr hide">Marriage can't be empty</p>
+      </div>
+      <div class="occupation textbox mb35">
+        <label for="occupation">Occupation</label>
+        <input type="text" id="occupation" placeholder="If retired or disabled enter your last occupation">
+      </div>
+      <div class="retired asterisk mb35">
+        <label>Retired?<span>*</span></label>
+        <div class="retired-option">
+          <div class="radio">
+            <input type="radio" id="retired-yes" name="retired" value="Yes">
+            <label for="retired-yes">Yes</label><br>
+          </div>
+          <div class="radio">
+            <input type="radio" id="retired-no" name="retired" value="No">
+            <label for="retired-no">No</label><br>
+          </div>
+        </div>
+        <p class="err retiredErr hide">Retired can't be empty</p>
+      </div>
+      <div class="disability asterisk mb35">
+        <label>Disability?<span>*</span></label>
+        <div class="disability-option">
+          <div class="radio">
+            <input type="radio" id="disability-yes" name="disability" value="Yes">
+            <label for="disability-yes">Yes</label><br>
+          </div>
+          <div class="radio">
+            <input type="radio" id="disability-no" name="disability" value="No">
+            <label for="disability-no">No</label><br>
+          </div>
+        </div>
+        <p class="err disabilityErr hide">Disability can't be empty</p>
+      </div>
+      <div class="doctor textbox mb35">
+        <label for="doctor">Who is your primary care doctor:</label>
+        <input type="text" id="doctor">
+      </div>
+      <div class="doctor-locate textbox mb35">
+        <label for="doctor-locality">Where is your primary care doctor located ?</label>
+        <input type="text" id="doctor-locality">
+      </div>
+      <div class="doctor-phone textbox mb35">
+        <label for="doctor-phone">Phone Number of primary care doctor:</label>
+        <input type="text" id="doctor-phone">
+      </div>
+      <div class="allergic mb35">
+        <label>Allergic to any medications</label>
+        <div class="allergic-option">
+          <div class="radio">
+            <input type="radio" id="allergic-yes" name="allergic" value="Yes">
+            <label for="allergic-yes">Yes</label><br>
+          </div>
+          <div class="radio">
+            <input type="radio" id="allergic-no" name="allergic" value="No">
+            <label for="allergic-no">No</label><br>
+          </div>
+        </div>
+
+      </div>
+      <div class="smoke mb35">
+        <label>Do you smoke?</label>
+        <div class="smoke-option">
+          <div class="radio">
+            <input type="radio" id="smoke-yes" name="smoke" value="Yes">
+            <label for="smoke-yes">Yes</label><br>
+          </div>
+          <div class="smoke-no radio">
+            <input type="radio" id="sm-no" name="smoke" value="No">
+            <label for="sm-no">No</label><br>
+          </div>
+        </div>
+      </div>
+      <div class="quit textbox mb35">
+        <label for="quit">If you quit, when did you stop?</label>
+        <input type="text" id="quit">
+      </div>
+      <div class="drink textbox mb35">
+        <label for="drink">Do you drink alcohol?</label>
+        <input type="text" id="drink">
+      </div>
+      <div class="person textbox mb35">
+        <label for="person">Personal opinion</label>
+        <textarea name="person" id="person" cols="30" rows="4"></textarea>
+      </div>
+      <button type="button">Submit Form</button>
+      <p class="err resultErr hide">Some info is incorrect. Please check to fullfill!</p>
+      <div class="result">
+        <p class="fname"></p>
+        <p class="lname"></p>
+        <p class="age"></p>
+        <p class="nickname"></p>
+        <p class="gender"></p>
+        <p class="phone-number"></p>
+        <p class="spouce-name"></p>
+        <p class="live-with"></p>
+        <p class="marriage"></p>
+        <p class="occupation"></p>
+        <p class="retired"></p>
+        <p class="disability"></p>
+        <p class="primary-doctor"></p>
+        <p class="doctor-locality"></p>
+        <p class="doctor-phone"></p>
+        <p class="allergic"></p>
+        <p class="smoke"></p>
+        <p class="stop"></p>
+        <p class="drink"></p>
+        <p class="personal"></p>
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
