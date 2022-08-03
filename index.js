@@ -46,7 +46,9 @@ let marriageValue; let retiredValue; let disabilityResult; let allergicResult; l
 btnSubmit.addEventListener('click', showResult)
 function showResult() {
   checkData();
-  showData();
+  if(checkData()){
+    showData();
+  }
 }
 function checkData() {
   checkAge();
@@ -55,10 +57,19 @@ function checkData() {
   checkMarriage();
   checkRetired();
   checkDisability();
+  if (checkAge() && checkGender() && checkPhone() && checkMarriage() && checkRetired() && checkDisability()) {
+    document.querySelector('.errResult .resultErr').classList.replace('show', 'hide');
+    document.querySelector('.result').classList.replace('hide', 'show');
+    return true;
+  }
+  else
+    document.querySelector('.errResult .resultErr').classList.replace('hide', 'show');
+    document.querySelector('.result').classList.replace('show', 'hide');
+    return false;
 }
 // AGE
 age.onchange = function (e) {
-  if (e.target.value < 0 || e.target.value > 150) {
+  if (e.target.value < 0 || e.target.value > 150 || e.target.value=='') {
     document.querySelector('.age .ageErr').innerText = 'Invalid age !'
     document.querySelector('.age .ageErr').classList.replace('hide', 'show');
     age.style.borderColor = 'red';
@@ -73,10 +84,12 @@ function checkAge() {
     document.querySelector('.age .ageErr').innerText = 'Age can\'t be empty'
     document.querySelector('.age .ageErr').classList.replace('hide', 'show');
     age.style.borderColor = 'red';
+    return false;
   }
   else {
     document.querySelector('.age .ageErr').classList.replace('show', 'hide');
   }
+  return true;
 }
 // GENDER
 gender.onchange = function (e) {
@@ -94,10 +107,12 @@ function checkGender() {
   if (gender.value == '') {
     document.querySelector('.gender .genderErr').classList.replace('hide', 'show');
     gender.style.borderColor = 'red';
+    return false;
   }
   else {
     document.querySelector('.gender .genderErr').classList.replace('show', 'hide');
   }
+  return true;
 }
 // PHONE
 phone.onchange = function (e) {
@@ -117,10 +132,12 @@ function checkPhone() {
     document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
     document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
     phone.style.borderColor = 'red';
+    return false;
   }
   else {
     document.querySelector('.phone .phoneErr').classList.replace('show', 'hide');
   }
+  return true;
 }
 //MARRIAGE
 function checkMarriage() {
@@ -128,13 +145,14 @@ function checkMarriage() {
     if (marriage[i].checked) {
       document.querySelector('.marriage .marriageErr').classList.replace('show', 'hide');
       document.querySelector('.marriage label:first-child').style.color = '#002f6b';
-      break;
+      return true;
     }
     else {
       document.querySelector('.marriage label:first-child').style.color = 'red';
       document.querySelector('.marriage .marriageErr').classList.replace('hide', 'show');
     }
   }
+  return false;
 }
 // RETIRED
 function checkRetired() {
@@ -142,13 +160,14 @@ function checkRetired() {
     if (retired[i].checked) {
       document.querySelector('.retired .retiredErr').classList.replace('show', 'hide');
       document.querySelector('.retired label:first-child').style.color = '#002f6b';
-      break;
+      return true;
     }
     else {
       document.querySelector('.retired label:first-child').style.color = 'red';
       document.querySelector('.retired .retiredErr').classList.replace('hide', 'show');
     }
   }
+  return false;
 }
 // DISABILITY
 function checkDisability() {
@@ -156,13 +175,14 @@ function checkDisability() {
     if (disability[i].checked) {
       document.querySelector('.disability .disabilityErr').classList.replace('show', 'hide');
       document.querySelector('.disability label:first-child').style.color = '#002f6b';
-      break;
+      return true;
     }
     else {
       document.querySelector('.disability label:first-child').style.color = 'red';
       document.querySelector('.disability .disabilityErr').classList.replace('hide', 'show');
     }
   }
+  return false;
 }
 function getRadioValue() {
   for (let i = 0; i < marriage.length; i++) {
@@ -257,6 +277,6 @@ const showData = async () => {
     renderData();
   } catch (error) {
     // enter your logic for when there is an error (ex. error toast)
-    console.log(error)
+    alert(error)
   }
 }

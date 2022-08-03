@@ -199,9 +199,12 @@ textarea {
   display: block;
 }
 
-p.err {
+p.err,.errResult {
   margin-top: 5px;
   color: #ff0000;
+}
+.errResult{
+  margin-top: 10px;
 }
 
 .result {
@@ -212,3 +215,4 @@ p.err {
   margin-bottom: 8px;
   font-size: 17px;
 }
+
