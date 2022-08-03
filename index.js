@@ -46,7 +46,7 @@ let marriageValue; let retiredValue; let disabilityResult; let allergicResult; l
 btnSubmit.addEventListener('click', showResult)
 function showResult() {
   checkData();
-  postAndShowData();
+  showData();
 }
 function checkData() {
   checkAge();
@@ -164,35 +164,6 @@ function checkDisability() {
     }
   }
 }
-// POST AND SHOW DATA
-function postAndShowData() {
-  getRadioValue();
-  postData(url, 
-    {
-    "Fname": fname.value,
-    "Lname": lname.value,
-    "Age": age.value,
-    "Nickname": nickname.value,
-    "Gender": gender.value,
-    "PatientPhone": phone.value,
-    "SpouceName": spouceName.value,
-    "LiveWith": lwith.value,
-    "MaritalStatus": marriageValue,
-    "Occupation": occupation.value,
-    "Retired": retiredValue,
-    "Disability": disabilityResult,
-    "Doctor": doctor.value,
-    "DoctorLocate": doctorLocality.value,
-    "DoctorPhone": doctorPhone.value,
-    "Allergic": allergicResult,
-    "Smoke": smokeResult,
-    "Stop": stop.value,
-    "Drink": drink.value,
-    "Opinion": opinion.value,
-  },function(){
-    getData();
-  })
-}
 function getRadioValue() {
   for (let i = 0; i < marriage.length; i++) {
     if (marriage[i].checked) {
@@ -226,22 +197,7 @@ function getRadioValue() {
     }
   }
 }
-function postData(url = '', data = {}, callback) {
-  // Default options are marked with *
-  fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-  })
-    .then(function (response) {
-      response.json();
-    })
-    .then(callback);
-}
-function getData() {
+function renderData() {
   fetch(url).then(res => res.json()).then(result => {
     resultFname.innerText = 'First name: ' + result[result.length - 1].Fname;
     resultLname.innerText = 'Last name: ' + result[result.length - 1].Lname;
@@ -264,4 +220,43 @@ function getData() {
     resultDrink.innerText = 'Drink: ' + result[result.length - 1].Drink;
     resultOpinion.innerText = 'Opinion: ' + result[result.length - 1].Opinion;
   });
+}
+
+const showData = async () => {
+  getRadioValue();
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "Fname": fname.value,
+        "Lname": lname.value,
+        "Age": age.value,
+        "Nickname": nickname.value,
+        "Gender": gender.value,
+        "PatientPhone": phone.value,
+        "SpouceName": spouceName.value,
+        "LiveWith": lwith.value,
+        "MaritalStatus": marriageValue,
+        "Occupation": occupation.value,
+        "Retired": retiredValue,
+        "Disability": disabilityResult,
+        "Doctor": doctor.value,
+        "DoctorLocate": doctorLocality.value,
+        "DoctorPhone": doctorPhone.value,
+        "Allergic": allergicResult,
+        "Smoke": smokeResult,
+        "Stop": stop.value,
+        "Drink": drink.value,
+        "Opinion": opinion.value
+      })
+    });
+    await response.json();
+    renderData();
+  } catch (error) {
+    // enter your logic for when there is an error (ex. error toast)
+    console.log(error)
+  }
 }
