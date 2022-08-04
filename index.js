@@ -42,34 +42,87 @@ let resultDrink = document.querySelector('.result .drink');
 let resultOpinion = document.querySelector('.result .personal');
 
 let url = "https://62e894c693938a545be7e19b.mockapi.io/kdAPI/Infomations";
-let marriageValue; let retiredValue; let disabilityResult; let allergicResult; let smokeResult;
+var marriageValue; let retiredValue; let diasbilityValue; let allergicResult; let smokeResult;
 btnSubmit.addEventListener('click', showResult)
 function showResult() {
   checkData();
-  if(checkData()){
+  if (checkData()) {
+    document.querySelector('.errResult .resultErr').classList.replace('hide', 'show');
+    document.querySelector('.result').classList.replace('show', 'hide');
+  }
+  else {
+    document.querySelector('.errResult .resultErr').classList.replace('show', 'hide');
+    document.querySelector('.result').classList.replace('hide', 'show');
     showData();
   }
 }
 function checkData() {
-  checkAge();
-  checkGender();
-  checkPhone();
-  checkMarriage();
-  checkRetired();
-  checkDisability();
-  if (checkAge() && checkGender() && checkPhone() && checkMarriage() && checkRetired() && checkDisability()) {
-    document.querySelector('.errResult .resultErr').classList.replace('show', 'hide');
-    document.querySelector('.result').classList.replace('hide', 'show');
-    return true;
+  getRadioValue();
+  let hasErr = false;
+  if (age.value == '') {
+    document.querySelector('.age .ageErr').innerText = 'Age can\'t be empty'
+    document.querySelector('.age .ageErr').classList.replace('hide', 'show');
+    age.style.borderColor = 'red';
+    hasErr=true;
   }
-  else
-    document.querySelector('.errResult .resultErr').classList.replace('hide', 'show');
-    document.querySelector('.result').classList.replace('show', 'hide');
-    return false;
+  if (gender.value == '') {
+    document.querySelector('.gender .genderErr').classList.replace('hide', 'show');
+    gender.style.borderColor = 'red';
+    hasErr = true;
+  }
+  if (phone.value == '') {
+      document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
+      document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
+      phone.style.borderColor = 'red';
+    hasErr=true;
+    }
+  if (marriageValue==''){
+    hasErr = true;
+  }
+  if (retiredValue ==''){
+    hasErr = true;
+  }
+  if (diasbilityValue ==''){
+    hasErr = true;
+  }
+  for (let i = 0; i < marriage.length; i++) {
+    if (marriage[i].checked) {
+      document.querySelector('.marriage .marriageErr').classList.replace('show', 'hide');
+      document.querySelector('.marriage label:first-child').style.color = '#002f6b';
+      break;
+    }
+    else {
+      document.querySelector('.marriage label:first-child').style.color = 'red';
+      document.querySelector('.marriage .marriageErr').classList.replace('hide', 'show');
+    }
+  }
+  for (let i = 0; i < retired.length; i++) {
+    if (retired[i].checked) {
+      document.querySelector('.retired .retiredErr').classList.replace('show', 'hide');
+      document.querySelector('.retired label:first-child').style.color = '#002f6b';
+      break;
+    }
+    else {
+      document.querySelector('.retired label:first-child').style.color = 'red';
+      document.querySelector('.retired .retiredErr').classList.replace('hide', 'show');
+    }
+  }
+  for (let i = 0; i < disability.length; i++) {
+    if (disability[i].checked) {
+      document.querySelector('.disability .disabilityErr').classList.replace('show', 'hide');
+      document.querySelector('.disability label:first-child').style.color = '#002f6b';
+      break;
+    }
+    else {
+      document.querySelector('.disability label:first-child').style.color = 'red';
+      document.querySelector('.disability .disabilityErr').classList.replace('hide', 'show');
+    }
+  }
+  return hasErr;
 }
 // AGE
 age.onchange = function (e) {
-  if (e.target.value < 0 || e.target.value > 150 || e.target.value=='') {
+  if (e.target.value < 0 || e.target.value > 150 || e.target.value == '') {
     document.querySelector('.age .ageErr').innerText = 'Invalid age !'
     document.querySelector('.age .ageErr').classList.replace('hide', 'show');
     age.style.borderColor = 'red';
@@ -78,18 +131,6 @@ age.onchange = function (e) {
     document.querySelector('.age .ageErr').classList.replace('show', 'hide');
     age.style.borderColor = '#ced4da';
   }
-}
-function checkAge() {
-  if (age.value == '') {
-    document.querySelector('.age .ageErr').innerText = 'Age can\'t be empty'
-    document.querySelector('.age .ageErr').classList.replace('hide', 'show');
-    age.style.borderColor = 'red';
-    return false;
-  }
-  else {
-    document.querySelector('.age .ageErr').classList.replace('show', 'hide');
-  }
-  return true;
 }
 // GENDER
 gender.onchange = function (e) {
@@ -103,17 +144,6 @@ gender.onchange = function (e) {
     gender.style.borderColor = '#ced4da';
   }
 }
-function checkGender() {
-  if (gender.value == '') {
-    document.querySelector('.gender .genderErr').classList.replace('hide', 'show');
-    gender.style.borderColor = 'red';
-    return false;
-  }
-  else {
-    document.querySelector('.gender .genderErr').classList.replace('show', 'hide');
-  }
-  return true;
-}
 // PHONE
 phone.onchange = function (e) {
   const phoneformat = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
@@ -126,63 +156,6 @@ phone.onchange = function (e) {
     document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
     phone.style.borderColor = 'red';
   }
-}
-function checkPhone() {
-  if (phone.value == '') {
-    document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
-    document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
-    phone.style.borderColor = 'red';
-    return false;
-  }
-  else {
-    document.querySelector('.phone .phoneErr').classList.replace('show', 'hide');
-  }
-  return true;
-}
-//MARRIAGE
-function checkMarriage() {
-  for (let i = 0; i < marriage.length; i++) {
-    if (marriage[i].checked) {
-      document.querySelector('.marriage .marriageErr').classList.replace('show', 'hide');
-      document.querySelector('.marriage label:first-child').style.color = '#002f6b';
-      return true;
-    }
-    else {
-      document.querySelector('.marriage label:first-child').style.color = 'red';
-      document.querySelector('.marriage .marriageErr').classList.replace('hide', 'show');
-    }
-  }
-  return false;
-}
-// RETIRED
-function checkRetired() {
-  for (let i = 0; i < retired.length; i++) {
-    if (retired[i].checked) {
-      document.querySelector('.retired .retiredErr').classList.replace('show', 'hide');
-      document.querySelector('.retired label:first-child').style.color = '#002f6b';
-      return true;
-    }
-    else {
-      document.querySelector('.retired label:first-child').style.color = 'red';
-      document.querySelector('.retired .retiredErr').classList.replace('hide', 'show');
-    }
-  }
-  return false;
-}
-// DISABILITY
-function checkDisability() {
-  for (let i = 0; i < disability.length; i++) {
-    if (disability[i].checked) {
-      document.querySelector('.disability .disabilityErr').classList.replace('show', 'hide');
-      document.querySelector('.disability label:first-child').style.color = '#002f6b';
-      return true;
-    }
-    else {
-      document.querySelector('.disability label:first-child').style.color = 'red';
-      document.querySelector('.disability .disabilityErr').classList.replace('hide', 'show');
-    }
-  }
-  return false;
 }
 function getRadioValue() {
   for (let i = 0; i < marriage.length; i++) {
@@ -199,7 +172,7 @@ function getRadioValue() {
   }
   for (let i = 0; i < disability.length; i++) {
     if (disability[i].checked) {
-      disabilityResult = disability[i].value;
+      diasbilityValue = disability[i].value;
       break;
     }
   }
@@ -219,6 +192,7 @@ function getRadioValue() {
 }
 function renderData() {
   fetch(url).then(res => res.json()).then(result => {
+
     resultFname.innerText = 'First name: ' + result[result.length - 1].Fname;
     resultLname.innerText = 'Last name: ' + result[result.length - 1].Lname;
     resultAge.innerText = 'Age: ' + result[result.length - 1].Age;
@@ -241,9 +215,7 @@ function renderData() {
     resultOpinion.innerText = 'Opinion: ' + result[result.length - 1].Opinion;
   });
 }
-
 const showData = async () => {
-  getRadioValue();
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -262,7 +234,7 @@ const showData = async () => {
         "MaritalStatus": marriageValue,
         "Occupation": occupation.value,
         "Retired": retiredValue,
-        "Disability": disabilityResult,
+        "Disability": diasbilityValue,
         "Doctor": doctor.value,
         "DoctorLocate": doctorLocality.value,
         "DoctorPhone": doctorPhone.value,
@@ -277,6 +249,6 @@ const showData = async () => {
     renderData();
   } catch (error) {
     // enter your logic for when there is an error (ex. error toast)
-    alert(error)
+    alert(error);
   }
 }
