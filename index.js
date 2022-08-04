@@ -20,29 +20,31 @@ let drink = document.getElementById('drink');
 let opinion = document.getElementById('person');
 let btnSubmit = document.querySelector('.form-body button');
 
-let resultFname = document.querySelector('.result .fname');
-let resultLname = document.querySelector('.result .lname');
-let resultAge = document.querySelector('.result .age');
-let resultNickname = document.querySelector('.result .nickname');
-let resultGender = document.querySelector('.result .gender');
-let resultPhone = document.querySelector('.result .phone-number');
-let resultSpoceName = document.querySelector('.result .spouce-name');
-let resultLiveWith = document.querySelector('.result .live-with');
-let resultMarriage = document.querySelector('.result .marriage');
-let resultOccupation = document.querySelector('.result .occupation');
-let resultRetired = document.querySelector('.result .retired');
-let resultDisability = document.querySelector('.result .disability');
-let resultPrimaryDoctor = document.querySelector('.result .primary-doctor');
-let resultDoctorLocality = document.querySelector('.result .doctor-locality');
-let resultDoctorPhone = document.querySelector('.result .doctor-phone');
-let resultAllergic = document.querySelector('.result .allergic');
-let resultSmoke = document.querySelector('.result .smoke');
-let resultStop = document.querySelector('.result .stop');
-let resultDrink = document.querySelector('.result .drink');
-let resultOpinion = document.querySelector('.result .personal');
+// let resultFname = document.querySelector('.result .fname');
+// let resultLname = document.querySelector('.result .lname');
+// let resultAge = document.querySelector('.result .age');
+// let resultNickname = document.querySelector('.result .nickname');
+// let resultGender = document.querySelector('.result .gender');
+// let resultPhone = document.querySelector('.result .phone-number');
+// let resultSpoceName = document.querySelector('.result .spouce-name');
+// let resultLiveWith = document.querySelector('.result .live-with');
+// let resultMarriage = document.querySelector('.result .marriage');
+// let resultOccupation = document.querySelector('.result .occupation');
+// let resultRetired = document.querySelector('.result .retired');
+// let resultDisability = document.querySelector('.result .disability');
+// let resultPrimaryDoctor = document.querySelector('.result .primary-doctor');
+// let resultDoctorLocality = document.querySelector('.result .doctor-locality');
+// let resultDoctorPhone = document.querySelector('.result .doctor-phone');
+// let resultAllergic = document.querySelector('.result .allergic');
+// let resultSmoke = document.querySelector('.result .smoke');
+// let resultStop = document.querySelector('.result .stop');
+// let resultDrink = document.querySelector('.result .drink');
+// let resultOpinion = document.querySelector('.result .personal');
 
 let url = "https://62e894c693938a545be7e19b.mockapi.io/kdAPI/Infomations";
 var marriageValue; let retiredValue; let diasbilityValue; let allergicResult; let smokeResult;
+let errBorderColor = 'red';
+let trueBorderColor = '#ced4da'
 btnSubmit.addEventListener('click', showResult)
 function showResult() {
   checkData();
@@ -62,29 +64,24 @@ function checkData() {
   if (age.value == '') {
     document.querySelector('.age .ageErr').innerText = 'Age can\'t be empty'
     document.querySelector('.age .ageErr').classList.replace('hide', 'show');
-    age.style.borderColor = 'red';
-    hasErr=true;
+    age.style.borderColor = errBorderColor;
+    hasErr = true;
   }
   if (gender.value == '') {
     document.querySelector('.gender .genderErr').classList.replace('hide', 'show');
-    gender.style.borderColor = 'red';
+    age.style.borderColor = errBorderColor;
     hasErr = true;
   }
   if (phone.value == '') {
-      document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
-      document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
-      phone.style.borderColor = 'red';
-    hasErr=true;
-    }
-  if (marriageValue==''){
+    document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
+    document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
+    age.style.borderColor = errBorderColor;
     hasErr = true;
   }
-  if (retiredValue ==''){
+  if (marriageValue == '' || retiredValue == '' || diasbilityValue == '') {
     hasErr = true;
   }
-  if (diasbilityValue ==''){
-    hasErr = true;
-  }
+
   for (let i = 0; i < marriage.length; i++) {
     if (marriage[i].checked) {
       document.querySelector('.marriage .marriageErr').classList.replace('show', 'hide');
@@ -92,7 +89,7 @@ function checkData() {
       break;
     }
     else {
-      document.querySelector('.marriage label:first-child').style.color = 'red';
+      document.querySelector('.marriage label:first-child').style.color = age.style.borderColor = errBorderColor;;
       document.querySelector('.marriage .marriageErr').classList.replace('hide', 'show');
     }
   }
@@ -103,7 +100,7 @@ function checkData() {
       break;
     }
     else {
-      document.querySelector('.retired label:first-child').style.color = 'red';
+      document.querySelector('.retired label:first-child').style.color = age.style.borderColor = errBorderColor;;
       document.querySelector('.retired .retiredErr').classList.replace('hide', 'show');
     }
   }
@@ -114,7 +111,7 @@ function checkData() {
       break;
     }
     else {
-      document.querySelector('.disability label:first-child').style.color = 'red';
+      document.querySelector('.disability label:first-child').style.color = age.style.borderColor = errBorderColor;;
       document.querySelector('.disability .disabilityErr').classList.replace('hide', 'show');
     }
   }
@@ -125,11 +122,11 @@ age.onchange = function (e) {
   if (e.target.value < 0 || e.target.value > 150 || e.target.value == '') {
     document.querySelector('.age .ageErr').innerText = 'Invalid age !'
     document.querySelector('.age .ageErr').classList.replace('hide', 'show');
-    age.style.borderColor = 'red';
+    age.style.borderColor = errBorderColor;
   }
   else {
     document.querySelector('.age .ageErr').classList.replace('show', 'hide');
-    age.style.borderColor = '#ced4da';
+    age.style.borderColor = trueBorderColor;
   }
 }
 // GENDER
@@ -137,11 +134,11 @@ gender.onchange = function (e) {
   if (gender.value == '') {
     document.querySelector('.gender .genderErr').innerText = 'Invalid gender !'
     document.querySelector('.gender .genderErr').classList.replace('hide', 'show');
-    gender.style.borderColor = 'red';
+    age.style.borderColor = errBorderColor;
   }
   else {
     document.querySelector('.gender .genderErr').classList.replace('show', 'hide');
-    gender.style.borderColor = '#ced4da';
+    gender.style.borderColor = trueBorderColor;
   }
 }
 // PHONE
@@ -149,12 +146,12 @@ phone.onchange = function (e) {
   const phoneformat = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
   if (e.target.value.match(phoneformat)) {
     document.querySelector('.phone .phoneErr').classList.replace('show', 'hide');
-    phone.style.borderColor = '#ced4da';
+    phone.style.borderColor = trueBorderColor;
   }
   else {
     document.querySelector('.phone .phoneErr').innerText = 'Invalid phone number!'
     document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
-    phone.style.borderColor = 'red';
+    age.style.borderColor = errBorderColor;
   }
 }
 function getRadioValue() {
@@ -192,27 +189,31 @@ function getRadioValue() {
 }
 function renderData() {
   fetch(url).then(res => res.json()).then(result => {
-
-    resultFname.innerText = 'First name: ' + result[result.length - 1].Fname;
-    resultLname.innerText = 'Last name: ' + result[result.length - 1].Lname;
-    resultAge.innerText = 'Age: ' + result[result.length - 1].Age;
-    resultNickname.innerText = 'Nickname: ' + result[result.length - 1].Nickname;
-    resultGender.innerText = 'Gender: ' + result[result.length - 1].Gender;
-    resultPhone.innerText = 'Phone: ' + result[result.length - 1].PatientPhone;
-    resultSpoceName.innerText = 'Spoce Name: ' + result[result.length - 1].SpouceName;
-    resultLiveWith.innerText = 'Live with: ' + result[result.length - 1].LiveWith;
-    resultMarriage.innerText = 'Marriage: ' + result[result.length - 1].MaritalStatus;
-    resultOccupation.innerText = 'Occupation: ' + result[result.length - 1].Occupation;
-    resultRetired.innerText = 'Retired: ' + result[result.length - 1].Retired;
-    resultDisability.innerText = 'Disability: ' + result[result.length - 1].Disability;
-    resultPrimaryDoctor.innerText = 'Primary Doctor: ' + result[result.length - 1].Doctor;
-    resultDoctorLocality.innerText = 'Doctor location: ' + result[result.length - 1].DoctorLocate;
-    resultDoctorPhone.innerText = 'Doctor phone: ' + result[result.length - 1].DoctorPhone;
-    resultAllergic.innerText = 'Allergic: ' + result[result.length - 1].Allergic;
-    resultSmoke.innerText = 'Smoke: ' + result[result.length - 1].Smoke;
-    resultStop.innerText = 'Stop: ' + result[result.length - 1].Stop;
-    resultDrink.innerText = 'Drink: ' + result[result.length - 1].Drink;
-    resultOpinion.innerText = 'Opinion: ' + result[result.length - 1].Opinion;
+    let ulResult = document.querySelector(' .result');
+    for(i=0;i<result.length;i++){
+    ulResult.innerHTML += `
+    <h2 style="margin-bottom: 10px;">Patient ${result[i].id}</h2>
+    <li><p>First name: ${result[i].Fname}</p></li>
+    <li><p>Last name: ${result[i].Lname}</p></li>
+    <li><p>Age: ${result[i].Age}</p></li>
+    <li><p>Nickname: ${result[i].Nickname}</p></li>
+    <li><p>Gender: ${result[i].Gender}</p></li>
+    <li><p>Phone: ${result[i].PatientPhone}</p></li>
+    <li><p>Spoce Name: ${result[i].SpouceName}</p></li>
+    <li><p>Live with: ${result[i].LiveWith}</p></li>
+    <li><p>Marriage: ${result[i].MaritalStatus}</p></li>
+    <li><p>Occupation: ${result[i].Occupation}</p></li>
+    <li><p>Retired: ${result[i].Retired}</p></li>
+    <li><p>Disability: ${result[i].Disability}</p></li>
+    <li><p>Primary Doctor: ${result[i].Doctor}</p></li>
+    <li><p>Doctor location: ${result[i].DoctorLocate}</p></li>
+    <li><p>Doctor phone: ${result[i].DoctorPhone}</p></li>
+    <li><p>Allergic: ${result[i].Allergic}</p></li>
+    <li><p>Smoke: ${result[i].Smoke}</p></li>
+    <li><p>Stop: ${result[i].Stop}</p></li>
+    <li><p>Drink: ${result[i].Drink}</p></li>
+    <li><p>Opinion: ${result[i].Opinion}</p></li>
+    `;}
   });
 }
 const showData = async () => {
@@ -244,8 +245,7 @@ const showData = async () => {
         "Drink": drink.value,
         "Opinion": opinion.value
       })
-    });
-    await response.json();
+    })
     renderData();
   } catch (error) {
     // enter your logic for when there is an error (ex. error toast)
