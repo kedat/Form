@@ -51,7 +51,7 @@ function checkData() {
     gender.style.borderColor = errBorderColor;
     hasErr = true;
   }
-  if (phone.value == '') {
+  if (phone.value == '' || phone.style.borderColor == errBorderColor) {
     document.querySelector('.phone .phoneErr').classList.replace('hide', 'show');
     document.querySelector('.phone .phoneErr').innerText = 'Phone can\'t be empty'
     phone.style.borderColor = errBorderColor;
