@@ -159,7 +159,6 @@ textarea:focus-visible {
   font-weight: 450;
 }
 
-
 .radio input {
   margin-right: 6px;
 }
@@ -209,10 +208,20 @@ p.err,
 }
 
 .result {
-  margin-top: 40px;
+  margin: 40px 0px;
+  border-collapse: collapse;
+  background-color: #fff;
+  overflow: scroll;
+  height: 600px;
 }
 
-.result p {
-  margin-bottom: 8px;
-  font-size: 17px;
+td,
+th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 5px;
+}
+
+th {
+  text-align: center;
 }
